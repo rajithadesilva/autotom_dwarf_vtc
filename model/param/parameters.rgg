@@ -1,3 +1,39 @@
+// AutoTom adapter v2. Read configuration before scene/material construction.
+static java.util.Properties UI_CFG = uiLoad();
+static java.util.Properties uiLoad() {
+    java.util.Properties p = new java.util.Properties();
+    java.io.File file = new java.io.File(System.getProperty("autotom.modelDir", getWD())+"autotom.properties");
+    if (!file.isFile()) { throw new IllegalStateException("Missing autotom.properties; run AutoTom setup"); }
+    java.io.FileInputStream stream = new java.io.FileInputStream(file);
+    p.load(stream);
+    stream.close();
+    return p;
+}
+static String uiText(String key, String fallback) { return UI_CFG.getProperty(key, fallback); }
+static double uiDouble(String key, double fallback) { return Double.parseDouble(uiText(key, ""+fallback)); }
+static float uiFloat(String key, float fallback) { return (float)uiDouble(key, fallback); }
+static int uiInt(String key, int fallback) { return (int)uiDouble(key, fallback); }
+static boolean uiBool(String key, boolean fallback) { return Boolean.parseBoolean(uiText(key, ""+fallback)); }
+static float[] uiOptics(String key, float[] original, boolean transmission) {
+    if (UI_CFG.getProperty(key) == null) { return original; }
+    float[] values = new float[original.length];
+    java.util.Arrays.fill(values, transmission ? 0.0f : uiFloat(key, 0.0f));
+    return values;
+}
+static float[] uiSpectrum(float[] wavelengths, float[] original) {
+    if (UI_CFG.getProperty("spectrum_wavelengths") == null) { return original; }
+    String[] ws = uiText("spectrum_wavelengths", "").split(",");
+    String[] vs = uiText("spectrum_amplitudes", "").split(",");
+    float[] values = new float[wavelengths.length];
+    for(int i=0; i<values.length; i++) {
+        int j=0;
+        while(j<ws.length-2 && Double.parseDouble(ws[j+1])<wavelengths[i]) { j++; }
+        double t=(wavelengths[i]-Double.parseDouble(ws[j]))/(Double.parseDouble(ws[j+1])-Double.parseDouble(ws[j]));
+        values[i]=(float)((1-t)*Double.parseDouble(vs[j])+t*Double.parseDouble(vs[j+1]));
+    }
+    return values;
+}
+
 // important
 // - the internode below the cotyledon has rank 0
 // - the internode below the cotyledon is phytomer 0
@@ -8,7 +44,7 @@ CONSTANTS, SETTINGS & FIXED PARAMETERS
 ******************************************************************************/
 
 //static	String	PATH_INPUT 							=	"C:/Users/Marloes/ONEDRI~1/MSCTHE~2/R/Model/input/";	// PATH of the model folder
-static	String	PATH_INPUT 								=	getWD()+"input/";										// PATH of the model folder
+static	String	PATH_INPUT 								=	System.getProperty("autotom.modelDir", getWD())+"input/";										// PATH of the model folder
 static	String	PATH_STATIC_IN							=	"static_input/";
 static	String	PATH_DYNAMIC_IN	 						=	"dynamic_input/";
 static	String	PATH_LIGHT_SPECTRUM_FILE				=	"light_spectrum/";
@@ -18,7 +54,7 @@ static	String	PATH_DAILY_AVERAGE_TEMPERATURES_FILE	=	"temperature/";
 static	String	LIGHT_SENSOR_POSITION_FILE				=	"light_sensor.csv";										// File with the positions of the light sensors
 
 //static	String	PATH_OUTPUT							=	"C:/Users/Marloes/ONEDRI~1/MSCTHE~2/R/Model/output/";	// PATH of the model folder
-static	String	PATH_OUTPUT								=	getWD()+"output/";										// PATH of the model folder
+static	String	PATH_OUTPUT								=	System.getProperty("autotom.modelDir", getWD())+"output/";										// PATH of the model folder
 static	String	PATH_RENDERING_OUT 						=	"rendering_output/";
 static	String	PATH_SENSOR_OUT 						=	"sensor_output/";
 static	String	PATH_DYNAMIC_OUT_CROP					=	"dynamic_output/crop/";
@@ -41,28 +77,28 @@ static 	boolean measure_light_below_canopy				=	false;
 static	boolean EXPORT_2D_IMAGE							=	false;
 static 	boolean EXPORT_3D_IMAGE 						=	false;
 
-static 	boolean ROOM 									=	true;
+static 	boolean ROOM 									=	uiBool("room_enabled", true);
 static 	boolean LAMPS									=	true;
 
 static	boolean LIGHT_SENSOR							=	false;
 static 	boolean VISIBLE_RAYS 							=	false;
 static	boolean LIGHT_SENSOR_IN_LAYERS					=	false;
 
-static	int		DURATION_DAYS							=	80;
-static	boolean	RED_TOMATOES_REMOVED					=	false;
+static	int		DURATION_DAYS							=	uiInt("days", 80);
+static	boolean	RED_TOMATOES_REMOVED					=	uiBool("remove_ripe_fruit", false);
 
 /*ROOM*/
-static	float	LENGTH1									=	1.2;		//(m);
-static	float	WIDTH									=	1.2;		//(m);
-static	float	HEIGHT	;												//(m);
+static	float	LENGTH1									=	uiFloat("length", 1.2f);		//(m);
+static	float	WIDTH									=	uiFloat("width", 1.2f);		//(m);
+static	float	HEIGHT = uiFloat("height", 0.735f);												//(m);
 
 /*PLANT DISPOSITION*/
-static	int		NR_PLANTS								=	3;			// For this exeriment ideal number is 2. number of plants in a row
-static	int 	NR_ROWS									=	3;			// For this exeriment ideal number is 3. number of rows
-static	int 	NR_BORDER_ROWS							=	2;			// For this exeriment ideal number is 2. number of border rows
-static	int 	NR_BORDER_PLANTS_IN_ROW					=	2;			// For this exeriment ideal number is 2. number of border rows
-static	float	ROCKWOOL_WIDTH_LENGTH					=	0.1;		//(m);
-static	float	ROCKWOOL_HEIGHT							=	0.065;		//(m);
+static	int		NR_PLANTS								=	uiInt("plants_per_row", 3);			// For this exeriment ideal number is 2. number of plants in a row
+static	int 	NR_ROWS									=	uiInt("rows", 3);			// For this exeriment ideal number is 3. number of rows
+static	int 	NR_BORDER_ROWS							=	uiInt("border_rows", 2);			// For this exeriment ideal number is 2. number of border rows
+static	int 	NR_BORDER_PLANTS_IN_ROW					=	uiInt("border_plants", 2);			// For this exeriment ideal number is 2. number of border rows
+static	float	ROCKWOOL_WIDTH_LENGTH					=	uiFloat("rockwool_width", 0.1f);		//(m);
+static	float	ROCKWOOL_HEIGHT							=	uiFloat("rockwool_height", 0.065f);		//(m);
 
 /*LIGHT HARDWARE*/
 static	float	LED_FIXTURE_LENGTH 						=	LENGTH1;	//(m); length of one single LED module containing several LEDs
@@ -72,7 +108,7 @@ static	float	LAMP_COVER_HEIGHT						=	0.01;		//(m);
 static	float	LAMP_COVER_WIDTH						=	0.1;		//(m);
 
 /*CLIMATE*/	
-static	double	PHOTOPERIOD								=	16;			//(h); hours of daylight
+static	double	PHOTOPERIOD								=	uiDouble("photoperiod", 16);			//(h); hours of daylight
 
 /*Time units*/
 const	float	NUMBER_OF_TIME_UNITS_DURING_A_DAY		=	24; 		// is used to convert daily values (photosynthesis) to the Reference base time units.
@@ -86,11 +122,11 @@ static 	float 	T_SIZE_Y								=	0.02;		// (m) length of tile
 static 	int 	TILE_LAYER								=	12;			// you can see/hide the sensor in the interface by controlling layer 12
 
 /*Light Model*/
-const	int		RAYS_GPU								=	21474000;	//	good ;	// max is 2147482999
+const	int		RAYS_GPU								=	uiInt("rays", 21474000);	//	good ;	// max is 2147482999
 const	int		RAYS_CPU								=	10000000;	// Temporary values //
-const	int		RAY_DEPTH								=	10;			// good 10
+const	int		RAY_DEPTH								=	uiInt("ray_depth", 10);			// good 10
 	
-const	int		SET_SEED								=	0;			// 
+const	int		SET_SEED								=	uiInt("seed", 0);			// 
 
 static	Phong PLANT_RENDERING_SHADER					=	new Phong().(setDiffuse(new RGBColor(0.26, 0.64, 0.21)));
 static	Phong RIPE_TOMATO_RENDERING_SHADER				=	new Phong().(setDiffuse(new RGBColor(1,0.0 , 0.0)));

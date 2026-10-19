@@ -313,15 +313,16 @@ protected void startup()
  
 protected void run(Object info)
 {
-	reset();
-	init();
-	reset();
-	println("input is " + Main.getArg(0));
-	println("output is " + Main.getArg(1));
-	inputFile = Main.getArg(0);
-	outputFile = Main.getArg(1);
-	runHeadless();
-   System.exit(0);
+    try {
+        println("AUTOTOM_STARTED");
+        reset();
+        runHeadless();
+        println("AUTOTOM_COMPLETE");
+        System.exit(0);
+    } catch (Throwable error) {
+        error.printStackTrace();
+        System.exit(1);
+    }
 }
 
 
@@ -356,59 +357,24 @@ static String outputFile;
 // main method for the headless version
 protected void runHeadless()
 {
-	// set the output file, where the computed values should be stored
-	PrintWriter out = new PrintWriter(new FileWriter(outputFile, false));	// headless
-	updateParameters();	// use inputs from the csv file
-	if (!isStatic) {
-
-		out.println("Plant number,  cumulative_PAR_absorbed_per_plant_umol, cumulative_carbon_assimilation_plant_umol, cumulative_gross_assimmilates_plant_mg,cumulative_maintenance_demand_plant_mg,cumulative_assimilates_plant_mg,dry_biomass_fruits_mg,dry_biomass_plant_above_ground_mg");		
-		dynamicModel	=	true;
-		
-		for (apply(DURATION_DAYS)) {
-			
-			if (time == 0) {
-				resetFilesDynamic(listOfFiles[nr_file].getName());
-				MTG	=	readMTGData(PATH_INPUT+PATH_DYNAMIC_IN+listOfFiles[nr_file].getName());
-				{ 
-					derive(); 
-					createMTG((* PlantBase *)); //Next steps would be to add identifier to work with multiple MTGs, to create a canopy of diverse plants
-				}	
-			} else {
-				develop();
-			}
-				derive();
-			
-				update_light();
-				update_crop();	
-				derive(); 
-
-			exportDynamicToFile(listOfFiles[nr_file].getName());
-
-		
-		}	
-		
-
-			[			
-				p:PlantBase ::> {
-			out.println(p[plant_number]+","+p[cumulative_PAR_absorbed_per_plant_umol]+","+p[cumulative_carbon_assimilation_plant_umol]+","+p[cumulative_gross_assimmilates_plant_mg]+","+p[cumulative_maintenance_demand_plant_mg]+","+p[cumulative_assimilates_plant_mg]+","+p[dry_biomass_fruits_mg]+","+p[dry_biomass_plant_above_ground_mg]);
-				}
-			]
-			
-			
-			
-	} else {
-		Static_Model();
-		  out.println("Plant number,         PAR absorbed plant all (umol/s),           PAR absorbed leaves (umol/s),                      CO2 assimilation (umol/s),                     CO2 assimilation leaves (umol/s),              gross_assimmilates_mg,          gross_assimmilates_just_leaves_mg,           maintenance_demand_mg,    assimilates_mg,      assimilates_if_just_leaves_mg");
-	[		
-		p:PlantBase ::> {
-			out.println(p[plant_number]+","+p[PAR_absorbed_per_plant_all_second_umol]+","+p[PAR_absorbed_per_plant_leaves_second_umol]+","+p[carbon_assimilation_plant_second_umol]+","+p[carbon_assimilation_plant_leaves_second_umol]+","+p[gross_assimmilates_mg]+","+p[gross_assimmilates_just_leaves_mg]+","+p[maintenance_demand_mg]+","+p[assimilates_mg]+","+p[assimilates_if_just_leaves_mg]);
-		
-		}
-	]	
-	}
-      
-	out.flush();
-	out.close();	
+    dynamicModel = true;
+    nr_file = 0;
+    String filename = listOfFiles[0].getName();
+    resetFilesDynamic(filename);
+    for (int day=1; day<=DURATION_DAYS; day++) {
+        if (time == 0) {
+            MTG = readMTGData(PATH_INPUT+PATH_DYNAMIC_IN+filename);
+            derive();
+            createMTG((* PlantBase *));
+        } else { develop(); }
+        derive();
+        update_light();
+        update_crop();
+        derive();
+        exportDynamicToFile(filename);
+        autoTomExportDay(day);
+        println("AUTOTOM_DAY " + day);
+    }
 }
 
 // read input parameters from a csv file
@@ -496,3 +462,21 @@ public void load() {
 	[RGGRoot ==> tmp.cloneGraph();]
 }
 */
+// Each ready marker follows all exports; the worker publishes the whole day atomically.
+static void autoTomExportDay(int day) {
+    String dir = PATH_OUTPUT+"days/"+String.format("%04d", day)+"/";
+    new File(dir).mkdirs();
+    export3DScene(dir+"scene.obj", "obj");
+    export3DScene(dir+"plants.obj", "obj", first((* CropBase *)));
+    PrintWriter metrics = new PrintWriter(new FileWriter(dir+"metrics.csv", false));
+    metrics.println("plant,model_age_days,biomass_g,fruit_g,leaf_area_m2,par_umol_s,par_mmol_day,carbon_mmol_day");
+    [pb:PlantBase ::> {
+        metrics.println(pb[plant_number]+","+pb[age_in_days_d]+","+
+            pb[dry_biomass_plant_with_roots_mg]/1000.0+","+pb[dry_biomass_fruits_mg]/1000.0+","+
+            pb[leaf_area_m2]+","+pb[PAR_absorbed_per_plant_all_second_umol]+","+
+            pb[PAR_absorbed_per_plant_all_second_umol]*PHOTOPERIOD*3.6+","+
+            pb[carbon_assimilation_plant_daily_umol]/1000.0);
+    }]
+    metrics.close();
+    new File(dir+"ready").createNewFile();
+}

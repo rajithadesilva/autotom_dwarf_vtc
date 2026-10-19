@@ -12,6 +12,7 @@
    <ref name="objects">
     <ref name="files">
      <de.grogra.pf.ui.registry.SourceFile mimeType="text/x-grogra-rgg" name="Model.rgg" systemId="pfs:Model.rgg"/>
+     <de.grogra.pf.ui.registry.SourceFile mimeType="text/x-grogra-rgg" name="autotom_scene.rgg" systemId="pfs:autotom_scene.rgg"/>
      <de.grogra.pf.ui.registry.SourceDirectory name="param" systemId="pfs:param">
       <de.grogra.pf.ui.registry.SourceFile mimeType="text/x-grogra-rgg" name="auxiliary_tools_and_charts.rgg" systemId="pfs:param/auxiliary_tools_and_charts.rgg"/>
       <de.grogra.pf.ui.registry.SourceFile mimeType="text/x-grogra-rgg" name="parameters.rgg" systemId="pfs:param/parameters.rgg"/>

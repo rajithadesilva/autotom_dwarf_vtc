@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.util.stream.IntStream;
 
 static void lightModelSettings () {
+    lmGPU.setSeed(Math.max(1, SET_SEED));
 	lmGPU.setMeasureMode(MeasureMode.FULL_SPECTRUM);
 	lmGPU.setSpectralBuckets(61);
 	lmGPU.setSpectralDomain(400, 700);
@@ -32,7 +33,7 @@ module RedBlueLED extends LightNode {
 	{
 		setLight(
 			new SpectralLight(
-				new IrregularSpectralCurve(WAVELENGTHS, AMPLITUDES)
+				new IrregularSpectralCurve(WAVELENGTHS, uiSpectrum(WAVELENGTHS, AMPLITUDES))
 			).(
 				setPower(LIGHT_POWER),
 				setLight(

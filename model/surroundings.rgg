@@ -27,8 +27,8 @@ static {
 	cube_Shader.setDiffuseTransparency(cube_SPT);
 }
 
-const ChannelSPD wall_SPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, WALL_SPD));
-const ChannelSPD wall_SPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, WALL_SPT));
+const ChannelSPD wall_SPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("wall_reflectance", WALL_SPD, false)));
+const ChannelSPD wall_SPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("wall_reflectance", WALL_SPT, true)));
 
 const Phong wall_Shader = new Phong();
 
@@ -38,8 +38,8 @@ static {
 }
 
 
-const ChannelSPD floor_SPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, FLOOR_SPD));
-const ChannelSPD floor_SPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, FLOOR_SPT));
+const ChannelSPD floor_SPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("floor_reflectance", FLOOR_SPD, false)));
+const ChannelSPD floor_SPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("floor_reflectance", FLOOR_SPT, true)));
 
 const Phong floor_Shader = new Phong();
 
@@ -50,8 +50,8 @@ static {
 
 
 /*ceiling*/
-const ChannelSPD ceilingSPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, CEILING_SPD));
-const ChannelSPD ceilingSPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, CEILING_SPT));
+const ChannelSPD ceilingSPD = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("ceiling_reflectance", CEILING_SPD, false)));
+const ChannelSPD ceilingSPT = new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, uiOptics("ceiling_reflectance", CEILING_SPT, true)));
 
 const Phong ceilingShader = new Phong();
 

@@ -38,18 +38,7 @@ DISTANCE_ROWS						=	1/Math.sqrt(DENSITY);		//(m); distance between rows
 }
 
 {
-if (DENSITY == 35){ LIGHT_POWER = 45; HEIGHT = 0.735; }
-if (DENSITY == 50){ LIGHT_POWER = 43.8; HEIGHT = 0.735; }
-if (DENSITY == 65){ LIGHT_POWER = 41.8; HEIGHT = 0.7; }
-if (DENSITY == 80){ LIGHT_POWER = 40.6; HEIGHT = 0.69; }
-if (DENSITY == 95){ LIGHT_POWER = 40.2; HEIGHT = 0.69; }
-
-//maggie case
-
-if (DENSITY == 18.5){ LIGHT_POWER = 43.1; HEIGHT = 0.735; }
-if (DENSITY == 100){ LIGHT_POWER = 35.49; HEIGHT = 0.69; }
-
-
+LIGHT_POWER = 43.8;
 
 	LENGTH_EXPERIMENTAL					=	(( DISTANCE_ROWS          - ROCKWOOL_WIDTH_LENGTH)*(NR_ROWS  +1) + (ROCKWOOL_WIDTH_LENGTH)*NR_ROWS);		
 	println(LENGTH_EXPERIMENTAL);
@@ -397,12 +386,12 @@ static double [][]Daily_average_temperatures;
 
 {
     folder_light_distribution = new File(PATH_INPUT+PATH_LIGHT_DISTRIBUTION_FILE);
-    listOfFiles_light_distribution = folder_light_distribution.listFiles();
+    listOfFiles_light_distribution = new File[]{new File(folder_light_distribution, uiText("emission_input", "light_distribution.csv"))};
 	LIGHT_DISTRIBUTION =	convertToDoubleMatrix(readCSV(PATH_INPUT+PATH_LIGHT_DISTRIBUTION_FILE+listOfFiles_light_distribution[0].getName()));
 
 	//here the matrix containing the light spectrum is defined (HOWEVER AS STRINGS)
 	folder_light_spectrum = new File(PATH_INPUT+PATH_LIGHT_SPECTRUM_FILE);
-    listOfFiles_spectrum = folder_light_spectrum.listFiles();
+    listOfFiles_spectrum = new File[]{new File(folder_light_spectrum, uiText("spectrum_input", "spectrum.csv"))};
 	LIGHT_SPECTRUM_AND_OPTICAL_PROPERTIES =	readCSV(PATH_INPUT+PATH_LIGHT_SPECTRUM_FILE+listOfFiles_spectrum[0].getName());
 
 	//here the matrix containing the light spectrum is defined
@@ -410,11 +399,13 @@ static double [][]Daily_average_temperatures;
 
     if (isStatic==false){
     	folder = new File(PATH_INPUT+PATH_DYNAMIC_IN);
-    	listOfFiles = folder.listFiles();
+    	listOfFiles = new File[]{new File(folder, uiText("plant_input", "base_plant_dynamic_50.csv"))};
     	read_dynamic_input(readCSV(PATH_INPUT+PATH_DYNAMIC_IN+listOfFiles[0].getName()));
+        AMPLITUDES = uiSpectrum(WAVELENGTHS, AMPLITUDES);
+        DENSITY = uiDouble("density", DENSITY);
     	    
     	folder_temperatures = new File(PATH_INPUT+PATH_DAILY_AVERAGE_TEMPERATURES_FILE);
-    	listOfFiles_temperatures = folder_temperatures.listFiles();
+    	listOfFiles_temperatures = new File[]{new File(folder_temperatures, uiText("temperature_input", "total_daily_avg_temperature_group_exp2.csv"))};
     	Daily_average_temperatures =	convertToDoubleMatrix(readCSV(PATH_INPUT+PATH_DAILY_AVERAGE_TEMPERATURES_FILE+listOfFiles_temperatures[0].getName()));
 
 	}else if (isStatic==true){

@@ -1,0 +1,36 @@
+// Generated from autotom.json. Coordinates: metres, Z-up; Euler XYZ degrees.
+import static parameters.*;
+import static parameters_derived.*;
+import static surroundings.*;
+import de.grogra.gpuflux.imp3d.spectral.IrregularSpectralCurve;
+import de.grogra.gpuflux.imp3d.objects.*;
+import de.grogra.gpuflux.imp3d.shading.ChannelSPD;
+import javax.vecmath.Matrix4d;
+
+module AutoTomPose(double[] values) extends Null {
+    { if (values != null) { setTransform(new Matrix4d(values)); } }
+}
+
+module AutoTomLED(double power) extends LightNode {
+    { if (power > 0) { setLight(new SpectralLight(new IrregularSpectralCurve(WAVELENGTHS, AMPLITUDES)).(
+        setPower(power), setLight(new PhysicalLight(LIGHT_DISTRIBUTION)))); } }
+}
+
+static Phong autoTomSurface(double value) {
+    float[] values = new float[WAVELENGTHS.length];
+    java.util.Arrays.fill(values, (float)value);
+    return new Phong().(setDiffuse(new ChannelSPD(new IrregularSpectralCurve(WAVELENGTHS, values))));
+}
+
+module AutoTomEnvironment ==> [
+[if(ROOM)(Walls RoomFloor Ceiling)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.2,0.0,-1.0,-1.22464679915e-16,0.2,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.2,0.0,-1.0,-1.22464679915e-16,0.6,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.2,0.0,-1.0,-1.22464679915e-16,1.0,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.6,0.0,-1.0,-1.22464679915e-16,0.2,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.6,0.0,-1.0,-1.22464679915e-16,0.6,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,0.6,0.0,-1.0,-1.22464679915e-16,1.0,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,1.0,0.0,-1.0,-1.22464679915e-16,0.2,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,1.0,0.0,-1.0,-1.22464679915e-16,0.6,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+[AutoTomPose(new double[]{1.0,-0.0,0.0,1.0,0.0,-1.0,-1.22464679915e-16,1.0,0.0,1.22464679915e-16,-1.0,0.725,0.0,0.0,0.0,1.0}) AutoTomLED(43.8)]
+];

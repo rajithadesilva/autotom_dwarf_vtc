@@ -1,3 +1,4 @@
+import static autotom_scene.*;
 import static parameters.*;
 import static parameters_derived.*;
 import static organs.*;
@@ -16,7 +17,8 @@ import de.grogra.gpuflux.imp3d.objects.*;
 import de.grogra.gpuflux.tracer.FluxLightModelTracer.*;
 
 static void resetCounters() {
-	time				=	0;
+	time = 0;
+    TOTAL_PLANTS = 0;
 	setSeed(SET_SEED);
 }
 
@@ -64,157 +66,25 @@ static void newInitiate()[
 	
 	//LightModelVisualizer(1000000,7)
 	
-	//Construction of the room	
-	{println("Welcome #################################################");}
+	[AutoTomEnvironment]
 
-	[
-		if(ROOM)(
-			Walls 
-			RoomFloor 
-			Ceiling
-		)
-	]
 
-	//Light positioning
-	[if(LAMPS)(GridLamp)]
-
-	// start field setup containing plants arranged in rows, which are arranged in strips 
-	
-	cb:CropBase
-	[	
-		{
-			int i = 0;
-		}
-
-		//setup of a strip
-		for (int line=1; line<=NR_ROWS; line++) (
-						
-			//setup of a row
-			[			
-				for (int pos=1; pos<=NR_PLANTS; pos++) (
-					[	
-						Translate(  WIDTH/2 - DISTANCE_PLANTS_IN_ROW*(NR_PLANTS-1)/2,LENGTH1/2 - (NR_ROWS-1)*DISTANCE_ROWS/2,0)
-						Translate( 0,ROCKWOOL_WIDTH_LENGTH/2,0)
-						RockwoolBlock
-						Translate( 0,-ROCKWOOL_WIDTH_LENGTH/2,ROCKWOOL_HEIGHT)
-							
-						{i++;}
-						// add plants
-						
-						RH(random(0,360))
-						pb:PlantBase 
-						rh:RH(random(0,0))
-						{	
-							pb.initiate(i, line, pos);
-							pb.initialAngle = rh.angle;
-
-							TOTAL_PLANTS++;							
-							/*reserves.setColumnKey(i,i); 					
-							plantBiomass.setColumnKey(i,i); 
-							photo.setColumnKey(i,i); 
-							above_ground.setColumnKey(i,i); 
-							Roots_biomass.setColumnKey(i,i); 
-							dry_biomass_leaf_blades_chart.setColumnKey(i,i); 
-							dry_biomass_internodes_chart.setColumnKey(i,i); 
-							dry_biomass_stems_chart.setColumnKey(i,i); 
-							internode_chart.setColumnKey(i,i); 	*/
-						}	
-						Sphere(0.005)	
-					]			
-					Translate(DISTANCE_PLANTS_IN_ROW,0,0)
-				)
-			]	
-		Translate(0,DISTANCE_ROWS,0)	
-		)		
-	]
-		// Light measurement as layer
-		[	
-			if (LIGHT_SENSOR_IN_LAYERS)(
-/*
-				for (int layer_number = 0; layer_number < HEIGHT_WHERE_TO_MEASURE_LIGHT.length; layer_number++)(
-					[Translate(0,0,HEIGHT_WHERE_TO_MEASURE_LIGHT[layer_number])
-						{int j=10; int x=100; int y=1;}
-						for (1:NR_Y) (
-							[
-								for (1:NR_X) (
-									it:TileSensor {it.initiate(j,x,y);}
-									Translate(T_SIZE_X,0,0)
-									{x++;j++;}
-								)
-							]
-							Translate(0,T_SIZE_Y,0)
-							{y++;x=1;}
-						)
-					]
-				)*/
-			)
-		]
-		//The canopy is cloned in a grid with the class GridClonerNode - this is useful to increase the number of plants in a canopy without influencing too much the computation time.
-		[		
-			[	Translate( 0,ROCKWOOL_WIDTH_LENGTH/2,0)
-				Translate(
-				WIDTH/2 - DISTANCE_PLANTS_IN_ROW*(NR_PLANTS-1)/2,
-				LENGTH1/2 - (NR_ROWS-1 ) * DISTANCE_ROWS/2 - DISTANCE_ROWS*NR_BORDER_ROWS,
-				ROCKWOOL_HEIGHT
-				)
-				for (1:NR_BORDER_ROWS)(
-					[for (1:NR_PLANTS)(
-						[Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,0)RH(random(0,360))CopyPlant][ Translate(0,0,-ROCKWOOL_HEIGHT) RockwoolBlockCloned]
-						Translate(DISTANCE_PLANTS_IN_ROW,0,0)
-					)]
-					Translate(0,DISTANCE_ROWS,0)
-				)
-			]
-			[	Translate( 0,ROCKWOOL_WIDTH_LENGTH/2,0)
-				Translate(
-				WIDTH/2 - DISTANCE_PLANTS_IN_ROW*(NR_PLANTS-1)/2,
-				LENGTH1/2 + (NR_ROWS-1 ) * DISTANCE_ROWS/2 + DISTANCE_ROWS,
-				ROCKWOOL_HEIGHT
-				)		
-				for (1:NR_BORDER_ROWS)(
-					[for (1:NR_BORDER_PLANTS_IN_ROW+NR_PLANTS)(
-					[Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,0)RH(random(0,360))CopyPlant][ Translate(0,0,-ROCKWOOL_HEIGHT) RockwoolBlockCloned]
-					Translate(DISTANCE_PLANTS_IN_ROW,0,0)
-					)]
-					Translate(0,DISTANCE_ROWS,0)
-				)			
-			]
-			[	Translate( 0,ROCKWOOL_WIDTH_LENGTH/2,0)
-
-				Translate(
-				WIDTH/2 + DISTANCE_PLANTS_IN_ROW*(NR_PLANTS+1)/2,
-				LENGTH1/2- DISTANCE_ROWS*(NR_ROWS)/2 - DISTANCE_ROWS*(NR_BORDER_ROWS-1) - DISTANCE_ROWS/2 //
-				,
-				ROCKWOOL_HEIGHT
-				)		
-			
-				for (1:NR_BORDER_ROWS+NR_ROWS)(
-					[for (1:NR_BORDER_PLANTS_IN_ROW)(
-						[Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,0)RH(random(0,360))CopyPlant][ Translate(0,0,-ROCKWOOL_HEIGHT) RockwoolBlockCloned]
-						Translate(DISTANCE_PLANTS_IN_ROW,0,0)
-					)]
-					Translate(0,DISTANCE_ROWS,0)
-				)
-			//	
-			]
-				[
-				Translate( 0,ROCKWOOL_WIDTH_LENGTH/2,0)
-				Translate(
-				//WIDTH/2 -DISTANCE_PLANTS_IN_ROW*(NR_PLANTS-1) - DISTANCE_PLANTS_IN_ROW*(NR_BORDER_PLANTS_IN_ROW-1)
-				WIDTH/2 - DISTANCE_PLANTS_IN_ROW*(NR_PLANTS-1)/2 -DISTANCE_PLANTS_IN_ROW*(NR_BORDER_PLANTS_IN_ROW), 
-				LENGTH1/2 - DISTANCE_ROWS*(NR_BORDER_ROWS-1) - DISTANCE_ROWS*(NR_ROWS)/2 - DISTANCE_ROWS/2,
-				ROCKWOOL_HEIGHT
-				)		
-			for (1:2*NR_BORDER_ROWS+NR_ROWS)(
-				[for (1:NR_BORDER_PLANTS_IN_ROW)(
-						[Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,0)RH(random(0,360))CopyPlant][ Translate(0,0,-ROCKWOOL_HEIGHT) RockwoolBlockCloned]
-
-					Translate(DISTANCE_PLANTS_IN_ROW,0,0)
-				)]
-				Translate(0,DISTANCE_ROWS,0)
-			)
-			]
-	]
+    cb:CropBase [
+        for (int k=0; k<UI_CENTRAL.length; k++) (
+            [Translate(UI_CENTRAL[k][0],UI_CENTRAL[k][1],UI_CENTRAL[k][2])
+             Translate(0,ROCKWOOL_WIDTH_LENGTH/2,0) RockwoolBlock
+             Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,ROCKWOOL_HEIGHT)
+             RH(random(0,360)) RH(UI_CENTRAL[k][3]) pb:PlantBase rh:RH(random(0,0))
+             {pb.initiate(UI_IDS[k],UI_ROWS[k],UI_COLS[k]); pb.initialAngle=rh.angle; TOTAL_PLANTS++;}
+             Sphere(0.005)]
+        )
+    ]
+    [for (int k=0; k<UI_BORDERS.length; k++) (
+        [Translate(UI_BORDERS[k][0],UI_BORDERS[k][1],UI_BORDERS[k][2])
+         Translate(0,ROCKWOOL_WIDTH_LENGTH/2,0) RockwoolBlockCloned
+         Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,ROCKWOOL_HEIGHT)
+         RH(random(0,360)) RH(UI_BORDERS[k][3]) CopyPlant]
+    )]
 		// sensors following Camera Path in 3D (specified in the csv file called sensor_light.csv)
 		[	
 			if (LIGHT_SENSOR)(
@@ -229,7 +99,7 @@ static void newInitiate()[
 	// calculations of field properties
 	{
 		{
-			groundArea = DISTANCE_ROWS * DISTANCE_PLANTS_IN_ROW * TOTAL_PLANTS;
+			groundArea = TOTAL_PLANTS / DENSITY;
 			double linDens = 1 / DISTANCE_PLANTS_IN_ROW;
 			double linDensStrip = linDens * NR_ROWS;
 		}

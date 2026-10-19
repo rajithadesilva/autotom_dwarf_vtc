@@ -50,3 +50,7 @@ Content-Type: text/x-grogra-rgg; charset=windows-1252
 Name: rewrite_rules.rgg
 Content-Type: text/x-grogra-rgg; charset=windows-1252
 
+
+Name: autotom_scene.rgg
+Content-Type: text/x-grogra-rgg; charset=windows-1252
+
