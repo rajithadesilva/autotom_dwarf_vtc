@@ -1,3 +1,4 @@
+import static autotom_scene.*;
 import static rewrite_rules.*;
 import static parameters.*;
 import static parameters_derived.*;
@@ -478,5 +479,27 @@ static void autoTomExportDay(int day) {
             pb[carbon_assimilation_plant_daily_umol]/1000.0);
     }]
     metrics.close();
+    autoTomInspectDay(dir);
     new File(dir+"ready").createNewFile();
+}
+
+static void autoTomInspectDay(String dir) {
+    PrintWriter state = new PrintWriter(new FileWriter(dir+"plant_state.csv", false));
+    state.println("age_in_degree_days_dd,age_in_days_d,row,pos,plant_number,PAR_absorbed_per_plant_leaves_second_umol,PAR_absorbed_per_plant_all_second_umol,cumulative_PAR_absorbed_per_plant_umol,carbon_assimilation_plant_daily_umol,carbon_assimilation_plant_leaves_daily_umol,carbon_assimilation_plant_second_umol,carbon_assimilation_plant_leaves_second_umol,assimilates_mg,assimilates_if_just_leaves_mg,cumulative_carbon_assimilation_plant_umol,cumulative_gross_assimmilates_plant_mg,cumulative_maintenance_demand_plant_mg,cumulative_assimilates_plant_mg,reserve_pool_mg,sink_strength_per_day_mg,above_ground_organs_sink_strength,above_ground_organs_sink_strength_just_for_growth_and_not_respiration_growth_for_calculating_root_fraction,dry_biomass_roots,dry_biomass_plant_above_ground_mg,dry_biomass_leaf_blades,dry_biomass_internodes,dry_biomass_plant_mg,dry_biomass_plant_with_roots_mg,dry_biomass_structural_and_min_pool_mg,dry_biomass_plant_above_ground_vegetative_mg,dry_biomass_assimilates_and_available_buffer_mg,dry_biomass_total_buffer_mg,total_blades_dry_biomass_structural_mg,dry_biomass_leaves,dry_biomass_stems,dry_biomass_fruits_mg,fresh_biomass_fruits_mg,nr_internodes,root_shoot,leafArea,flowering,extending,initialAngle,test_appearance,dry_biomass_growth_mg,relative_growth_rate,relative_growth_rate_last_5_days,previous_day_dry_biomass_plant_with_roots_mg,temp_1,temp_2,temp_3,temp_4,temp_5,gross_assimmilates_mg,gross_assimmilates_just_leaves_mg,maintenance_demand_mg,dry_biomass_leaf_blades_mg,dry_biomass_leaf_blades_order_0_mg,dry_biomass_leaf_blades_order_1_mg,dry_biomass_leaves_mg,dry_biomass_leaves_0_mg,dry_biomass_leaves_1_mg,dry_biomass_internodes_mg,dry_biomass_internodes_0_mg,dry_biomass_internodes_1_mg,dry_biomass_truss_mg,fresh_biomass_fruits_harvested_mg,leaf_blade_area_m2,leaf_blade_area_order_0_m2,leaf_blade_area_order_1_m2,leaf_area_m2,leaf_area_order_0_m2,leaf_area_order_1_m2,assimilates_to_growth_mg");
+    [pb:PlantBase ::> {
+        state.println(""+pb[age_in_degree_days_dd]+","+pb[age_in_days_d]+","+pb[row]+","+pb[pos]+","+pb[plant_number]+","+pb[PAR_absorbed_per_plant_leaves_second_umol]+","+pb[PAR_absorbed_per_plant_all_second_umol]+","+pb[cumulative_PAR_absorbed_per_plant_umol]+","+pb[carbon_assimilation_plant_daily_umol]+","+pb[carbon_assimilation_plant_leaves_daily_umol]+","+pb[carbon_assimilation_plant_second_umol]+","+pb[carbon_assimilation_plant_leaves_second_umol]+","+pb[assimilates_mg]+","+pb[assimilates_if_just_leaves_mg]+","+pb[cumulative_carbon_assimilation_plant_umol]+","+pb[cumulative_gross_assimmilates_plant_mg]+","+pb[cumulative_maintenance_demand_plant_mg]+","+pb[cumulative_assimilates_plant_mg]+","+pb[reserve_pool_mg]+","+pb[sink_strength_per_day_mg]+","+pb[above_ground_organs_sink_strength]+","+pb[above_ground_organs_sink_strength_just_for_growth_and_not_respiration_growth_for_calculating_root_fraction]+","+pb[dry_biomass_roots]+","+pb[dry_biomass_plant_above_ground_mg]+","+pb[dry_biomass_leaf_blades]+","+pb[dry_biomass_internodes]+","+pb[dry_biomass_plant_mg]+","+pb[dry_biomass_plant_with_roots_mg]+","+pb[dry_biomass_structural_and_min_pool_mg]+","+pb[dry_biomass_plant_above_ground_vegetative_mg]+","+pb[dry_biomass_assimilates_and_available_buffer_mg]+","+pb[dry_biomass_total_buffer_mg]+","+pb[total_blades_dry_biomass_structural_mg]+","+pb[dry_biomass_leaves]+","+pb[dry_biomass_stems]+","+pb[dry_biomass_fruits_mg]+","+pb[fresh_biomass_fruits_mg]+","+pb[nr_internodes]+","+pb[root_shoot]+","+pb[leafArea]+","+pb[flowering]+","+pb[extending]+","+pb[initialAngle]+","+pb[test_appearance]+","+pb[dry_biomass_growth_mg]+","+pb[relative_growth_rate]+","+pb[relative_growth_rate_last_5_days]+","+pb[previous_day_dry_biomass_plant_with_roots_mg]+","+pb[temp_1]+","+pb[temp_2]+","+pb[temp_3]+","+pb[temp_4]+","+pb[temp_5]+","+pb[gross_assimmilates_mg]+","+pb[gross_assimmilates_just_leaves_mg]+","+pb[maintenance_demand_mg]+","+pb[dry_biomass_leaf_blades_mg]+","+pb[dry_biomass_leaf_blades_order_0_mg]+","+pb[dry_biomass_leaf_blades_order_1_mg]+","+pb[dry_biomass_leaves_mg]+","+pb[dry_biomass_leaves_0_mg]+","+pb[dry_biomass_leaves_1_mg]+","+pb[dry_biomass_internodes_mg]+","+pb[dry_biomass_internodes_0_mg]+","+pb[dry_biomass_internodes_1_mg]+","+pb[dry_biomass_truss_mg]+","+pb[fresh_biomass_fruits_harvested_mg]+","+pb[leaf_blade_area_m2]+","+pb[leaf_blade_area_order_0_m2]+","+pb[leaf_blade_area_order_1_m2]+","+pb[leaf_area_m2]+","+pb[leaf_area_order_0_m2]+","+pb[leaf_area_order_1_m2]+","+pb[assimilates_to_growth_mg]);
+    }]
+    state.close();
+    PrintWriter instances = new PrintWriter(new FileWriter(dir+"instances.csv", false));
+    instances.println("index,border,source,m00,m01,m02,m03,m10,m11,m12,m13,m20,m21,m22,m23");
+    [root:AutoTomInstance ::> {
+        de.grogra.vecmath.Matrix34d pose = transformation(root);
+        int source = root[border] ? UI_BORDER_SOURCE[root[index]] : UI_IDS[root[index]];
+        if (!root[border]) { export3DScene(dir+"plant-"+source+".obj", "obj", root); }
+        instances.println(root[index]+","+root[border]+","+source+","+
+            pose.m00+","+pose.m01+","+pose.m02+","+pose.m03+","+
+            pose.m10+","+pose.m11+","+pose.m12+","+pose.m13+","+
+            pose.m20+","+pose.m21+","+pose.m22+","+pose.m23);
+    }]
+    instances.close();
 }

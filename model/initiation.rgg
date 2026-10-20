@@ -74,7 +74,7 @@ static void newInitiate()[
             [Translate(UI_CENTRAL[k][0],UI_CENTRAL[k][1],UI_CENTRAL[k][2])
              Translate(0,ROCKWOOL_WIDTH_LENGTH/2,0) RockwoolBlock
              Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,ROCKWOOL_HEIGHT)
-             RH(random(0,360)) RH(UI_CENTRAL[k][3]) pb:PlantBase rh:RH(random(0,0))
+             RH(random(0,360)) RH(UI_CENTRAL[k][3]) AutoTomInstance(k,false) pb:PlantBase rh:RH(random(0,0))
              {pb.initiate(UI_IDS[k],UI_ROWS[k],UI_COLS[k]); pb.initialAngle=rh.angle; TOTAL_PLANTS++;}
              Sphere(0.005)]
         )
@@ -83,7 +83,7 @@ static void newInitiate()[
         [Translate(UI_BORDERS[k][0],UI_BORDERS[k][1],UI_BORDERS[k][2])
          Translate(0,ROCKWOOL_WIDTH_LENGTH/2,0) RockwoolBlockCloned
          Translate(0,-ROCKWOOL_WIDTH_LENGTH/2,ROCKWOOL_HEIGHT)
-         RH(random(0,360)) RH(UI_BORDERS[k][3]) CopyPlant]
+         RH(random(0,360)) RH(UI_BORDERS[k][3]) AutoTomInstance(k,true) AutoTomClone(k)]
     )]
 		// sensors following Camera Path in 3D (specified in the csv file called sensor_light.csv)
 		[	

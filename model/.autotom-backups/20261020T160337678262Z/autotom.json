@@ -1,0 +1,1247 @@
+{
+  "version": 2,
+  "room": {
+    "width": 1.2,
+    "length": 1.2,
+    "height": 0.735,
+    "enabled": true,
+    "wall_reflectance": null,
+    "floor_reflectance": null,
+    "ceiling_reflectance": null
+  },
+  "simulation": {
+    "days": 80,
+    "rows": 3,
+    "plants_per_row": 3,
+    "density": 50.0,
+    "border_rows": 2,
+    "border_plants": 2,
+    "seed": 0,
+    "rays": 21474000,
+    "photoperiod": 16.0,
+    "plant_input": "base_plant_dynamic_50.csv",
+    "temperature_input": "total_daily_avg_temperature_group_exp2.csv",
+    "emission_input": "light_distribution.csv",
+    "spectrum_input": "spectrum.csv"
+  },
+  "objects": [
+    {
+      "id": "led-1-1",
+      "name": "LED 5",
+      "kind": "led",
+      "position": [
+        0.6000000000000001,
+        0.6000000000000001,
+        0.6710000003874302
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "size": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "power_w": 43.8,
+      "reflectance": 0.5,
+      "enabled": true
+    }
+  ],
+  "spectrum": [
+    {
+      "wavelength": 400.0,
+      "amplitude": 0.002581506
+    },
+    {
+      "wavelength": 405.0,
+      "amplitude": 0.003250268
+    },
+    {
+      "wavelength": 410.0,
+      "amplitude": 0.004418088
+    },
+    {
+      "wavelength": 415.0,
+      "amplitude": 0.008260142
+    },
+    {
+      "wavelength": 420.0,
+      "amplitude": 0.017708491
+    },
+    {
+      "wavelength": 425.0,
+      "amplitude": 0.038013016
+    },
+    {
+      "wavelength": 430.0,
+      "amplitude": 0.07514156
+    },
+    {
+      "wavelength": 435.0,
+      "amplitude": 0.131137498
+    },
+    {
+      "wavelength": 440.0,
+      "amplitude": 0.196132204
+    },
+    {
+      "wavelength": 445.0,
+      "amplitude": 0.233469309
+    },
+    {
+      "wavelength": 450.0,
+      "amplitude": 0.205657198
+    },
+    {
+      "wavelength": 455.0,
+      "amplitude": 0.137819549
+    },
+    {
+      "wavelength": 460.0,
+      "amplitude": 0.082525965
+    },
+    {
+      "wavelength": 465.0,
+      "amplitude": 0.05076517
+    },
+    {
+      "wavelength": 470.0,
+      "amplitude": 0.031121405
+    },
+    {
+      "wavelength": 475.0,
+      "amplitude": 0.019895787
+    },
+    {
+      "wavelength": 480.0,
+      "amplitude": 0.014785531
+    },
+    {
+      "wavelength": 485.0,
+      "amplitude": 0.013013862
+    },
+    {
+      "wavelength": 490.0,
+      "amplitude": 0.013491731
+    },
+    {
+      "wavelength": 495.0,
+      "amplitude": 0.015953442
+    },
+    {
+      "wavelength": 500.0,
+      "amplitude": 0.019551114
+    },
+    {
+      "wavelength": 505.0,
+      "amplitude": 0.023689919
+    },
+    {
+      "wavelength": 510.0,
+      "amplitude": 0.027927103
+    },
+    {
+      "wavelength": 515.0,
+      "amplitude": 0.031558152
+    },
+    {
+      "wavelength": 520.0,
+      "amplitude": 0.034480754
+    },
+    {
+      "wavelength": 525.0,
+      "amplitude": 0.036390578
+    },
+    {
+      "wavelength": 530.0,
+      "amplitude": 0.037813714
+    },
+    {
+      "wavelength": 535.0,
+      "amplitude": 0.038760947
+    },
+    {
+      "wavelength": 540.0,
+      "amplitude": 0.039298641
+    },
+    {
+      "wavelength": 545.0,
+      "amplitude": 0.039526136
+    },
+    {
+      "wavelength": 550.0,
+      "amplitude": 0.039560974
+    },
+    {
+      "wavelength": 555.0,
+      "amplitude": 0.039307884
+    },
+    {
+      "wavelength": 560.0,
+      "amplitude": 0.039114663
+    },
+    {
+      "wavelength": 565.0,
+      "amplitude": 0.038699199
+    },
+    {
+      "wavelength": 570.0,
+      "amplitude": 0.038139412
+    },
+    {
+      "wavelength": 575.0,
+      "amplitude": 0.037524976
+    },
+    {
+      "wavelength": 580.0,
+      "amplitude": 0.036979165
+    },
+    {
+      "wavelength": 585.0,
+      "amplitude": 0.036343288
+    },
+    {
+      "wavelength": 590.0,
+      "amplitude": 0.035806611
+    },
+    {
+      "wavelength": 595.0,
+      "amplitude": 0.035559398
+    },
+    {
+      "wavelength": 600.0,
+      "amplitude": 0.03623464
+    },
+    {
+      "wavelength": 605.0,
+      "amplitude": 0.038520584
+    },
+    {
+      "wavelength": 610.0,
+      "amplitude": 0.043259879
+    },
+    {
+      "wavelength": 615.0,
+      "amplitude": 0.052366336
+    },
+    {
+      "wavelength": 620.0,
+      "amplitude": 0.06821946
+    },
+    {
+      "wavelength": 625.0,
+      "amplitude": 0.093912284
+    },
+    {
+      "wavelength": 630.0,
+      "amplitude": 0.134241399
+    },
+    {
+      "wavelength": 635.0,
+      "amplitude": 0.197235951
+    },
+    {
+      "wavelength": 640.0,
+      "amplitude": 0.297338587
+    },
+    {
+      "wavelength": 645.0,
+      "amplitude": 0.451619119
+    },
+    {
+      "wavelength": 650.0,
+      "amplitude": 0.663702365
+    },
+    {
+      "wavelength": 655.0,
+      "amplitude": 0.891510248
+    },
+    {
+      "wavelength": 660.0,
+      "amplitude": 0.991436397
+    },
+    {
+      "wavelength": 665.0,
+      "amplitude": 0.817289178
+    },
+    {
+      "wavelength": 670.0,
+      "amplitude": 0.479401543
+    },
+    {
+      "wavelength": 675.0,
+      "amplitude": 0.220033464
+    },
+    {
+      "wavelength": 680.0,
+      "amplitude": 0.09659712
+    },
+    {
+      "wavelength": 685.0,
+      "amplitude": 0.046352687
+    },
+    {
+      "wavelength": 690.0,
+      "amplitude": 0.025894914
+    },
+    {
+      "wavelength": 695.0,
+      "amplitude": 0.01749439
+    },
+    {
+      "wavelength": 700.0,
+      "amplitude": 0.014219869
+    }
+  ],
+  "planting": {
+    "mode": "custom",
+    "pattern": "grid",
+    "plant_spacing": null,
+    "row_spacing": null,
+    "center": [
+      0.6,
+      0.6,
+      0.0
+    ],
+    "rotation": 0.0,
+    "plants": [
+      {
+        "id": "plant-1",
+        "name": "Plant 1",
+        "role": "central",
+        "reporting_id": 1,
+        "position": [
+          0.4585786437626905,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 1
+      },
+      {
+        "id": "plant-2",
+        "name": "Plant 2",
+        "role": "central",
+        "reporting_id": 2,
+        "position": [
+          0.6,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 2
+      },
+      {
+        "id": "plant-3",
+        "name": "Plant 3",
+        "role": "central",
+        "reporting_id": 3,
+        "position": [
+          0.7414213562373095,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 3
+      },
+      {
+        "id": "plant-4",
+        "name": "Plant 4",
+        "role": "central",
+        "reporting_id": 4,
+        "position": [
+          0.4585786437626905,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 1
+      },
+      {
+        "id": "plant-5",
+        "name": "Plant 5",
+        "role": "central",
+        "reporting_id": 5,
+        "position": [
+          0.6,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 2
+      },
+      {
+        "id": "plant-6",
+        "name": "Plant 6",
+        "role": "central",
+        "reporting_id": 6,
+        "position": [
+          0.7414213562373095,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 3
+      },
+      {
+        "id": "plant-7",
+        "name": "Plant 7",
+        "role": "central",
+        "reporting_id": 7,
+        "position": [
+          0.4585786437626905,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 1
+      },
+      {
+        "id": "plant-8",
+        "name": "Plant 8",
+        "role": "central",
+        "reporting_id": 8,
+        "position": [
+          0.6,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 2
+      },
+      {
+        "id": "plant-9",
+        "name": "Plant 9",
+        "role": "central",
+        "reporting_id": 9,
+        "position": [
+          0.7414213562373095,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 3
+      },
+      {
+        "id": "plant-10",
+        "name": "Border 10",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.4585786437626905,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 1
+      },
+      {
+        "id": "plant-11",
+        "name": "Border 11",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.6,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 2
+      },
+      {
+        "id": "plant-12",
+        "name": "Border 12",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.7414213562373095,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 3
+      },
+      {
+        "id": "plant-13",
+        "name": "Border 13",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.4585786437626905,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 1
+      },
+      {
+        "id": "plant-14",
+        "name": "Border 14",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.6,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 2
+      },
+      {
+        "id": "plant-15",
+        "name": "Border 15",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.7414213562373095,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 3
+      },
+      {
+        "id": "plant-16",
+        "name": "Border 16",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.4585786437626905,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 1
+      },
+      {
+        "id": "plant-17",
+        "name": "Border 17",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.6,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 2
+      },
+      {
+        "id": "plant-18",
+        "name": "Border 18",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.7414213562373095,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 3
+      },
+      {
+        "id": "plant-19",
+        "name": "Border 19",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 4
+      },
+      {
+        "id": "plant-20",
+        "name": "Border 20",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 5
+      },
+      {
+        "id": "plant-21",
+        "name": "Border 21",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.4585786437626905,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 1
+      },
+      {
+        "id": "plant-22",
+        "name": "Border 22",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.6,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 2
+      },
+      {
+        "id": "plant-23",
+        "name": "Border 23",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.7414213562373095,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 3
+      },
+      {
+        "id": "plant-24",
+        "name": "Border 24",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 4
+      },
+      {
+        "id": "plant-25",
+        "name": "Border 25",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 5
+      },
+      {
+        "id": "plant-26",
+        "name": "Border 26",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 4
+      },
+      {
+        "id": "plant-27",
+        "name": "Border 27",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 5
+      },
+      {
+        "id": "plant-28",
+        "name": "Border 28",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 4
+      },
+      {
+        "id": "plant-29",
+        "name": "Border 29",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 5
+      },
+      {
+        "id": "plant-30",
+        "name": "Border 30",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 4
+      },
+      {
+        "id": "plant-31",
+        "name": "Border 31",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 5
+      },
+      {
+        "id": "plant-32",
+        "name": "Border 32",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 4
+      },
+      {
+        "id": "plant-33",
+        "name": "Border 33",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 5
+      },
+      {
+        "id": "plant-34",
+        "name": "Border 34",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.882842712474619,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 4
+      },
+      {
+        "id": "plant-35",
+        "name": "Border 35",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          1.0242640687119284,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 5
+      },
+      {
+        "id": "plant-36",
+        "name": "Border 36",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": -1
+      },
+      {
+        "id": "plant-37",
+        "name": "Border 37",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.17573593128807147,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": -1,
+        "col": 0
+      },
+      {
+        "id": "plant-38",
+        "name": "Border 38",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": -1
+      },
+      {
+        "id": "plant-39",
+        "name": "Border 39",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.31715728752538097,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 0,
+        "col": 0
+      },
+      {
+        "id": "plant-40",
+        "name": "Border 40",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": -1
+      },
+      {
+        "id": "plant-41",
+        "name": "Border 41",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.4585786437626905,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 1,
+        "col": 0
+      },
+      {
+        "id": "plant-42",
+        "name": "Border 42",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": -1
+      },
+      {
+        "id": "plant-43",
+        "name": "Border 43",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.6,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 2,
+        "col": 0
+      },
+      {
+        "id": "plant-44",
+        "name": "Border 44",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": -1
+      },
+      {
+        "id": "plant-45",
+        "name": "Border 45",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.7414213562373095,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 3,
+        "col": 0
+      },
+      {
+        "id": "plant-46",
+        "name": "Border 46",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": -1
+      },
+      {
+        "id": "plant-47",
+        "name": "Border 47",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          0.882842712474619,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 4,
+        "col": 0
+      },
+      {
+        "id": "plant-48",
+        "name": "Border 48",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.17573593128807147,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": -1
+      },
+      {
+        "id": "plant-49",
+        "name": "Border 49",
+        "role": "border",
+        "reporting_id": null,
+        "position": [
+          0.31715728752538097,
+          1.0242640687119284,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "enabled": true,
+        "row": 5,
+        "col": 0
+      }
+    ],
+    "next_reporting_id": 10
+  },
+  "groups": [],
+  "parameter_overrides": {},
+  "temperature_overrides": {}
+}
